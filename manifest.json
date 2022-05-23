@@ -1,0 +1,27 @@
+{
+    "name": "danime-open-video-in-new-tab",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "description": "Open the danime store video in new tab.",
+    "icons": {
+        "32": "images/icon_32.png",
+        "48": "images/icon_32.png",
+        "128": "images/icon_640.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://animestore.docomo.ne.jp/animestore/ci_pc*"],
+            "run_at":"document_start",
+            "js": ["src/scripts.js"]
+        }
+    ],
+    "background": {
+        "service_worker": "src/background.js"
+    },
+    "action": {
+        "default_icon": "images/icon_32.png",
+        "default_title": ""
+    },
+    "permissions": ["tabs", "background"],
+    "host_permissions": ["https://animestore.docomo.ne.jp/*"]
+}

@@ -13,7 +13,6 @@ let defaultButtonColor = "mediumseagreen";
 let hoveredButtonColor = "mediumaquamarine";
 
 const replacePlayButton = () => {
-    console.debug("setPlayButton");
     const playButton = document.getElementsByClassName("normal")[0];
 
     if (playButton) {

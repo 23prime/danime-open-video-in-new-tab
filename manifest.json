@@ -11,7 +11,6 @@
     "content_scripts": [
         {
             "matches": ["https://animestore.docomo.ne.jp/animestore/ci_pc*"],
-            "run_at":"document_start",
             "js": ["src/scripts.js"]
         }
     ],

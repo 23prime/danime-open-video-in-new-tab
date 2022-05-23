@@ -1,0 +1,33 @@
+.menu {
+    margin: 0;
+    padding: 0;
+    width: 240px;
+    text-align: center;
+    list-style: none;
+}
+
+.menu li {
+    margin: 0;
+    padding: 1px;
+    width: 100%;
+    overflow: hidden;
+    list-style: none;
+}
+
+.menu li a {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: block;
+    background: mediumseagreen;
+    color: #fff;
+    font-size: 14px;
+    line-height: 40px;
+    font-weight: bold;
+    text-decoration: none;
+    list-style: none;
+}
+
+.menu li a:hover {
+    background: mediumaquamarine;
+}

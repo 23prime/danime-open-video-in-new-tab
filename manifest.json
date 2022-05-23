@@ -16,7 +16,8 @@
     ],
     "action": {
         "default_icon": "images/icon_32.png",
-        "default_title": ""
+        "default_title": "",
+        "default_popup": "src/popup.html"
     },
     "permissions": ["tabs"],
     "host_permissions": ["https://animestore.docomo.ne.jp/*"]

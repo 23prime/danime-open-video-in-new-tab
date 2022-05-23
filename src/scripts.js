@@ -11,17 +11,40 @@ const openVideo = () => {
 
 let completed = false;
 
-const setPlayButton = () => {
+let defaultButtonColor = "mediumseagreen";
+let hoveredButtonColor = "mediumaquamarine";
+
+const replacePlayButton = () => {
     if (completed) return;
 
     console.debug("setPlayButton");
     const playButton = document.getElementsByClassName("normal")[0];
 
     if (playButton) {
-        playButton.innerHTML = "視聴する！";
-        playButton.onclick = openVideo;
+        const newPlayButton = createNewPlayButton();
+        playButton.parentNode.appendChild(newPlayButton);
+        playButton.parentNode.removeChild(playButton);
         completed = true;
     }
 };
 
-setInterval("setPlayButton()", 1000);
+const createNewPlayButton = () => {
+    newPlayButton = document.createElement("a");
+    newPlayButton.innerHTML = "視聴する！";
+
+    newPlayButton.style.setProperty("background-color", defaultButtonColor, "important");
+    newPlayButton.style.setProperty("cursor", "pointer", "important");
+    newPlayButton.onclick = openVideo;
+
+    newPlayButton.addEventListener("mouseover", (event) => {
+        newPlayButton.style.setProperty("background-color", hoveredButtonColor, "important");
+    });
+
+    newPlayButton.addEventListener("mouseleave", (event) => {
+        newPlayButton.style.setProperty("background-color", defaultButtonColor, "important");
+    });
+
+    return newPlayButton;
+};
+
+setInterval("replacePlayButton()", 1000);

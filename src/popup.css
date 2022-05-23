@@ -14,7 +14,7 @@
     list-style: none;
 }
 
-.menu li a {
+.menu li div {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -26,8 +26,9 @@
     font-weight: bold;
     text-decoration: none;
     list-style: none;
+    cursor: pointer;
 }
 
-.menu li a:hover {
+.menu li div:hover {
     background: mediumaquamarine;
 }

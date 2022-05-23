@@ -19,7 +19,7 @@
     padding: 0;
     height: 100%;
     display: block;
-    background: mediumseagreen;
+    background: #3cb371;
     color: #fff;
     font-size: 14px;
     line-height: 40px;
@@ -30,5 +30,5 @@
 }
 
 .menu li div:hover {
-    background: mediumaquamarine;
+    background: #66cdaa;
 }

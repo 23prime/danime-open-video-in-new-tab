@@ -1,6 +1,6 @@
 const config = {
-    defaultButtonColor: "mediumseagreen",
-    hoveredButtonColor: "mediumaquamarine",
+    defaultButtonColor: "#3cb371",
+    hoveredButtonColor: "#66cdaa",
 };
 
 const replacePlayButton = () => {

@@ -1,0 +1,40 @@
+.title {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.content {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+#main-color-picker-wrapper {
+    margin: 0;
+    padding: 12px 4px;
+}
+
+#hovered-color-picker-wrapper {
+    margin: 0;
+    padding: 12px 4px;
+}
+
+button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+    margin: 1em 0;
+    padding: 0.6em 1em;
+    font-size: 14px;
+    background: #3cb371;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 0;
+}
+
+button:hover {
+    background: #66cdaa;
+}

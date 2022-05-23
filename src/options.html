@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Menu</title>
+        <link rel="stylesheet" type="text/css" href="options.css" />
+    </head>
+
+    <body>
+        <p class="title">Choose button's colors</p>
+
+        <div class="content">
+            <div id="main-color-picker-wrapper">
+                <div>main color</div>
+                <div class="color-picker-input-wrapper">
+                    <input type="color" id="main-color-picker" />
+                    <input type="text" id="main-color-code" size="12" maxlength="7" />
+                </div>
+            </div>
+
+            <div id="hovered-color-picker-wrapper">
+                <div>hovered color</div>
+                <div class="color-picker-input-wrapper">
+                    <input type="color" id="hovered-color-picker" />
+                    <input type="text" id="hovered-color-code" size="12" maxlength="7" />
+                </div>
+            </div>
+
+            <button id="save-button" type="button">save</button>
+            <button id="reset-button" type="button">reset</button>
+        </div>
+
+        <script src="options.js"></script>
+    </body>
+</html>

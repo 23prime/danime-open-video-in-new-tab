@@ -9,14 +9,10 @@ const openVideo = () => {
     return true;
 };
 
-let completed = false;
-
 let defaultButtonColor = "mediumseagreen";
 let hoveredButtonColor = "mediumaquamarine";
 
 const replacePlayButton = () => {
-    if (completed) return;
-
     console.debug("setPlayButton");
     const playButton = document.getElementsByClassName("normal")[0];
 
@@ -24,7 +20,6 @@ const replacePlayButton = () => {
         const newPlayButton = createNewPlayButton();
         playButton.parentNode.appendChild(newPlayButton);
         playButton.parentNode.removeChild(playButton);
-        completed = true;
     }
 };
 

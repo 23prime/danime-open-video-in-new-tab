@@ -1,3 +1,10 @@
+const defaultConfig = {
+    mainButtonColor: "#3cb371",
+    hoveredButtonColor: "#66cdaa",
+};
+
+const storageKeys = Object.keys(defaultConfig);
+
 const init = () => {
     initEventListeners();
 };
@@ -20,7 +27,9 @@ const initEventListeners = () => {
 };
 
 const setMainColor = (element) => {
-    element.style.backgroundColor = localStorage.mainButtonColor;
+    chrome.storage.sync.get(storageKeys, (result) => {
+        element.style.backgroundColor = result.mainButtonColor || defaultConfig.mainButtonColor;
+    });
 };
 
 const addClickEvent = (element, url) => {
@@ -32,13 +41,17 @@ const addClickEvent = (element, url) => {
 
 const addMouseOverEvent = (element) => {
     element.addEventListener("mouseover", (event) => {
-        element.style.setProperty("background-color", localStorage.hoveredButtonColor, "important");
+        chrome.storage.sync.get(storageKeys, (result) => {
+            element.style.setProperty("background-color", result.hoveredButtonColor, "important");
+        });
     });
 };
 
 const addMouseLeaveEvent = (element) => {
     element.addEventListener("mouseleave", (event) => {
-        element.style.setProperty("background-color", localStorage.mainButtonColor, "important");
+        chrome.storage.sync.get(storageKeys, (result) => {
+            element.style.setProperty("background-color", result.mainButtonColor, "important");
+        });
     });
 };
 

@@ -1,7 +1,9 @@
-const defaultColors = {
-    main: "#3cb371",
-    hovered: "#66cdaa",
+const defaultConfig = {
+    mainButtonColor: "#3cb371",
+    hoveredButtonColor: "#66cdaa",
 };
+
+const storageKeys = Object.keys(defaultConfig);
 
 const mainColorPicker = document.getElementById("main-color-picker");
 const mainColorCode = document.getElementById("main-color-code");
@@ -10,22 +12,34 @@ const hoveredColorCode = document.getElementById("hovered-color-code");
 const saveButton = document.getElementById("save-button");
 const resetButton = document.getElementById("reset-button");
 
-const init = () => {
-    initLocalStorage();
-    setColorsFromLocalStorage();
+const init = async () => {
+    initStorage();
+    setColorsFromStorage();
     initEventListeners();
 };
 
-const initLocalStorage = () => {
-    localStorage.mainButtonColor ||= defaultColors.main;
-    localStorage.hoveredButtonColor ||= defaultColors.hovered;
+const initStorage = () => {
+    chrome.storage.sync.get(storageKeys, (result) => {
+        if (!result.mainButtonColor) setMainButtonColorToStorage(defaultConfig.mainButtonColor);
+        if (!result.hoveredButtonColor) setHoveredButtonColorToStorage(defaultConfig.hoveredButtonColor);
+    });
 };
 
-const setColorsFromLocalStorage = () => {
-    mainColorPicker.value = localStorage.mainButtonColor;
-    mainColorCode.value = localStorage.mainButtonColor;
-    hoveredColorPicker.value = localStorage.hoveredButtonColor;
-    hoveredColorCode.value = localStorage.hoveredButtonColor;
+const setMainButtonColorToStorage = (color) => {
+    chrome.storage.sync.set({ mainButtonColor: color }, () => {});
+};
+
+const setHoveredButtonColorToStorage = (color) => {
+    chrome.storage.sync.set({ hoveredButtonColor: color }, () => {});
+};
+
+const setColorsFromStorage = () => {
+    chrome.storage.sync.get(storageKeys, (result) => {
+        mainColorPicker.value = result.mainButtonColor;
+        mainColorCode.value = result.mainButtonColor;
+        hoveredColorPicker.value = result.hoveredButtonColor;
+        hoveredColorCode.value = result.hoveredButtonColor;
+    });
 };
 
 const initEventListeners = () => {
@@ -50,14 +64,14 @@ const updateHoveredColor = (event) => {
 };
 
 const save = () => {
-    localStorage.mainButtonColor = mainColorPicker.value;
-    localStorage.hoveredButtonColor = hoveredColorPicker.value;
+    setMainButtonColorToStorage(mainColorPicker.value);
+    setHoveredButtonColorToStorage(hoveredColorPicker.value);
 };
 
 const reset = () => {
-    localStorage.mainButtonColor = defaultColors.main;
-    localStorage.hoveredButtonColor = defaultColors.hovered;
-    setColorsFromLocalStorage();
+    setMainButtonColorToStorage(defaultConfig.mainButtonColor);
+    setHoveredButtonColorToStorage(defaultConfig.hoveredButtonColor);
+    setColorsFromStorage();
 };
 
 init();

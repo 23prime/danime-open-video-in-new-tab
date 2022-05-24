@@ -35,10 +35,10 @@ const setHoveredButtonColorToStorage = (color) => {
 
 const setColorsFromStorage = () => {
     chrome.storage.sync.get(storageKeys, (result) => {
-        mainColorPicker.value = result.mainButtonColor;
-        mainColorCode.value = result.mainButtonColor;
-        hoveredColorPicker.value = result.hoveredButtonColor;
-        hoveredColorCode.value = result.hoveredButtonColor;
+        mainColorPicker.value = result.mainButtonColor || defaultConfig.mainButtonColor;
+        mainColorCode.value = result.mainButtonColor || defaultConfig.mainButtonColor;
+        hoveredColorPicker.value = result.hoveredButtonColor || defaultConfig.hoveredButtonColor;
+        hoveredColorCode.value = result.hoveredButtonColor || defaultConfig.hoveredButtonColor;
     });
 };
 

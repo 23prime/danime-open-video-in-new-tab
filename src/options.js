@@ -51,7 +51,36 @@ const initEventListeners = () => {
         hoveredColorPicker.addEventListener("change", updateHoveredColor);
 
         saveButton.addEventListener("click", save);
+        setMainColor(saveButton);
+        addMouseOverEvent(saveButton);
+        addMouseLeaveEvent(saveButton);
+
         resetButton.addEventListener("click", reset);
+        setMainColor(resetButton);
+        addMouseOverEvent(resetButton);
+        addMouseLeaveEvent(resetButton);
+    });
+};
+
+const setMainColor = (element) => {
+    chrome.storage.sync.get(storageKeys, (result) => {
+        element.style.backgroundColor = result.mainButtonColor || defaultConfig.mainButtonColor;
+    });
+};
+
+const addMouseOverEvent = (element) => {
+    element.addEventListener("mouseover", (event) => {
+        chrome.storage.sync.get(storageKeys, (result) => {
+            element.style.setProperty("background-color", result.hoveredButtonColor, "important");
+        });
+    });
+};
+
+const addMouseLeaveEvent = (element) => {
+    element.addEventListener("mouseleave", (event) => {
+        chrome.storage.sync.get(storageKeys, (result) => {
+            element.style.setProperty("background-color", result.mainButtonColor, "important");
+        });
     });
 };
 
@@ -66,12 +95,16 @@ const updateHoveredColor = (event) => {
 const save = () => {
     setMainButtonColorToStorage(mainColorPicker.value);
     setHoveredButtonColorToStorage(hoveredColorPicker.value);
+    setMainColor(saveButton);
+    setMainColor(resetButton);
 };
 
 const reset = () => {
     setMainButtonColorToStorage(defaultConfig.mainButtonColor);
     setHoveredButtonColorToStorage(defaultConfig.hoveredButtonColor);
     setColorsFromStorage();
+    setMainColor(saveButton);
+    setMainColor(resetButton);
 };
 
 init();

@@ -20,6 +20,6 @@
         "default_popup": "src/popup.html"
     },
     "options_page": "src/options.html",
-    "permissions": ["tabs"],
+    "permissions": [],
     "host_permissions": ["https://animestore.docomo.ne.jp/*"]
 }

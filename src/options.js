@@ -71,7 +71,11 @@ const setMainColor = (element) => {
 const addMouseOverEvent = (element) => {
     element.addEventListener("mouseover", (event) => {
         chrome.storage.sync.get(storageKeys, (result) => {
-            element.style.setProperty("background-color", result.hoveredButtonColor, "important");
+            element.style.setProperty(
+                "background-color",
+                result.hoveredButtonColor || defaultConfig.hoveredButtonColor,
+                "important"
+            );
         });
     });
 };
@@ -79,7 +83,11 @@ const addMouseOverEvent = (element) => {
 const addMouseLeaveEvent = (element) => {
     element.addEventListener("mouseleave", (event) => {
         chrome.storage.sync.get(storageKeys, (result) => {
-            element.style.setProperty("background-color", result.mainButtonColor, "important");
+            element.style.setProperty(
+                "background-color",
+                result.mainButtonColor || defaultConfig.mainButtonColor,
+                "important"
+            );
         });
     });
 };

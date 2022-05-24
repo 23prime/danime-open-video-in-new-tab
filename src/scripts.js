@@ -1,7 +1,9 @@
-const config = {
-    defaultButtonColor: "#3cb371",
+const defaultConfig = {
+    mainButtonColor: "#3cb371",
     hoveredButtonColor: "#66cdaa",
 };
+
+const storageKeys = Object.keys(defaultConfig);
 
 const replacePlayButton = () => {
     const playButton = document.getElementsByClassName("normal")[0];
@@ -17,17 +19,12 @@ const createNewPlayButton = () => {
     newPlayButton = document.createElement("a");
     newPlayButton.innerHTML = "視聴する！";
 
-    newPlayButton.style.setProperty("background-color", config.defaultButtonColor, "important");
+    setMainColor(newPlayButton);
     newPlayButton.style.setProperty("cursor", "pointer", "important");
     newPlayButton.onclick = openVideo;
 
-    newPlayButton.addEventListener("mouseover", (event) => {
-        newPlayButton.style.setProperty("background-color", config.hoveredButtonColor, "important");
-    });
-
-    newPlayButton.addEventListener("mouseleave", (event) => {
-        newPlayButton.style.setProperty("background-color", config.defaultButtonColor, "important");
-    });
+    addMouseOverEvent(newPlayButton);
+    addMouseLeaveEvent(newPlayButton);
 
     return newPlayButton;
 };
@@ -41,6 +38,40 @@ const openVideo = () => {
     }
 
     return true;
+};
+
+const setMainColor = (element) => {
+    chrome.storage.sync.get(storageKeys, (result) => {
+        element.style.setProperty(
+            "background-color",
+            result.mainButtonColor || defaultConfig.mainButtonColor,
+            "important"
+        );
+    });
+};
+
+const addMouseOverEvent = (element) => {
+    element.addEventListener("mouseover", (event) => {
+        chrome.storage.sync.get(storageKeys, (result) => {
+            element.style.setProperty(
+                "background-color",
+                result.hoveredButtonColor || defaultConfig.hoveredButtonColor,
+                "important"
+            );
+        });
+    });
+};
+
+const addMouseLeaveEvent = (element) => {
+    element.addEventListener("mouseleave", (event) => {
+        chrome.storage.sync.get(storageKeys, (result) => {
+            element.style.setProperty(
+                "background-color",
+                result.mainButtonColor || defaultConfig.mainButtonColor,
+                "important"
+            );
+        });
+    });
 };
 
 setInterval("replacePlayButton()", 1000);
